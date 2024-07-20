@@ -12,9 +12,6 @@ scipy = "^1.14.0"
 [tool.poetry.dev-dependencies]
 pytest = "^8.3.1"
 
-[tool.poetry.excludes]
-exclude = ["__pycache__", ".pytest_cache", "*.pyc", "*.pyo", "*.pyd", "*.log"]
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
