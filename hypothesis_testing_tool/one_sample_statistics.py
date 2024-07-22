@@ -2,7 +2,7 @@ from scipy.stats import ttest_1samp
 
 
 class OneSampleHypothesisTesting:
-    def __init__(self, data: list, population_mean: float, alternative: str = "two-sided", alpha: float = 0.05):
+    def __init__(self, data: list, population_mean: float, alternative: str = "two-sided"):
 
         if len(data) < 2:
             raise Exception("Input data must have at least two data points")
