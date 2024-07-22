@@ -1,4 +1,6 @@
-from hypothesis_testing_tool.one_sample_statistics import OneSampleHypothesisTesting
+from hypothesis_testing_tool.one_sample_statistics import (
+    OneSampleHypothesisTesting,
+)
 import pytest
 
 
@@ -24,12 +26,20 @@ def test_one_sample_t_test_returns_correct_t_statistic_when_input_has_length_hig
 
 
 @pytest.mark.parametrize("input_data", [([]), [5]])
-def test_one_sample_t_test_raises_error_when_input_has_less_than_two_elements(input_data):
-    with pytest.raises(Exception, match="Input data must have at least two data points"):
+def test_one_sample_t_test_raises_error_when_input_has_less_than_two_elements(
+    input_data,
+):
+    with pytest.raises(
+        Exception,
+        match="Input data must have at least two data points",
+    ):
         OneSampleHypothesisTesting(input_data, population_mean=3.5)
 
 
 def test_one_sample_t_test_raises_error_when_input_has_identical_elements():
-    with pytest.raises(Exception, match="Input data must not have identical elements"):
+    with pytest.raises(
+        Exception,
+        match="Input data must not have identical elements",
+    ):
         input_data = [1] * 10
         OneSampleHypothesisTesting(input_data, population_mean=3.5)

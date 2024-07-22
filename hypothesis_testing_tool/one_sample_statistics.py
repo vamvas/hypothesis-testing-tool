@@ -2,7 +2,12 @@ from scipy.stats import ttest_1samp
 
 
 class OneSampleHypothesisTesting:
-    def __init__(self, data: list, population_mean: float, alternative: str = "two-sided"):
+    def __init__(
+        self,
+        data: list,
+        population_mean: float,
+        alternative: str = "two-sided",
+    ):
 
         if len(data) < 2:
             raise Exception("Input data must have at least two data points")
@@ -15,7 +20,11 @@ class OneSampleHypothesisTesting:
 
         self.population_mean = population_mean
 
-        self.t_test_results = ttest_1samp(a=self.data, popmean=population_mean, alternative=alternative)
+        self.t_test_results = ttest_1samp(
+            a=self.data,
+            popmean=population_mean,
+            alternative=alternative,
+        )
 
     def calculate_t_statistic(self) -> float:
 

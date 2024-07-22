@@ -13,6 +13,7 @@ def reload_project_modules():
             if module_path.startswith(project_dir):
                 importlib.reload(module)
 
+
 while True:
     user_input = input("Press Enter to run the tests (or type 'exit' to quit): ").strip().lower()
     if user_input == "exit":
