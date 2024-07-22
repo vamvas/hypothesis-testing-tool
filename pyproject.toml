@@ -25,4 +25,4 @@ pre-commit = "^3.7.1"
 line-length = 150
 
 [tool.mypy]
-ignore_missing_imports = True
+ignore_missing_imports = true
