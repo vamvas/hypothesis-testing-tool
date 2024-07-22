@@ -1,0 +1,19 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+    -   id: black
+        name: Run Linter (black)
+        args: [--line-length, '150']
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.10.1'
+    hooks:
+    -   id: mypy
+        name: Run Type Hint Checks (mypy)
