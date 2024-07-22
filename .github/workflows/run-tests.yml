@@ -32,3 +32,11 @@ jobs:
       - name: Run tests
         run: |
           poetry run pytest
+
+      - name: Run Black as Linter
+        run: |
+          poetry run black --check .
+
+      - name: Run Type Hint Checks
+        run: |
+          poetry run mypy .
