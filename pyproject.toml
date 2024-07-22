@@ -2,7 +2,7 @@
 name = "hypothesis-testing-tool"
 version = "0.1.0"
 description = "A tool for doing hypothesis testing"
-authors = ["Your Name <you@example.com>"]
+authors = ["Alexandros Vamvakaris-Skrivanos <vamvas@outlook.com.gr>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
