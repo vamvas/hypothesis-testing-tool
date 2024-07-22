@@ -31,5 +31,5 @@ def test_one_sample_t_test_raises_error_when_input_has_less_than_two_elements(in
 
 def test_one_sample_t_test_raises_error_when_input_has_identical_elements():
     with pytest.raises(Exception, match="Input data must not have identical elements"):
-        input_data = [1] * 20
+        input_data = [1] * 10
         OneSampleHypothesisTesting(input_data, population_mean=3.5)
