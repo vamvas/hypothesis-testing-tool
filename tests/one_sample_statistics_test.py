@@ -12,6 +12,22 @@ def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     assert round(t_test.statistic, 3) == 0.991
 
 
+def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_lower():
+
+    t_test = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], population_mean=3.5, alternative="less").t_test_results
+
+    assert round(t_test.pvalue, 3) == 0.811
+    assert round(t_test.statistic, 3) == 0.991
+
+
+def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_higher():
+
+    t_test = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], population_mean=3.5, alternative="greater").t_test_results
+
+    assert round(t_test.pvalue, 3) == 0.189
+    assert round(t_test.statistic, 3) == 0.991
+
+
 @pytest.mark.parametrize("input_data", [([]), [5]])
 def test_one_sample_t_test_raises_error_when_input_has_less_than_two_elements(
     input_data,
