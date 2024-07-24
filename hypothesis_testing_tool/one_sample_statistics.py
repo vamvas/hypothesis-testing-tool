@@ -24,12 +24,8 @@ class OneSampleHypothesisTesting:
             alternative=alternative,
         )
 
-    def calculate_ci(self, alpha=0.05) -> tuple:
-        sample_mean = np.mean(self.data)
-        standard_error = np.std(self.data) / len(self.data)
-        margin_of_error = stats.t.ppf((1 + (1 - alpha)) / 2, len(self.data) - 1) * standard_error
+    def calculate_ci(self, alpha: float = 0.05) -> tuple:
+        __standard_error = np.std(self.data, ddof=1) / np.sqrt(len(self.data))
+        __margin_of_error = stats.t.ppf((1 + (1 - alpha)) / 2, len(self.data) - 1) * __standard_error
 
-        lower_bound = sample_mean - margin_of_error
-        upper_bound = sample_mean + margin_of_error
-
-        return (lower_bound, upper_bound)
+        return (np.mean(self.data) - __margin_of_error, np.mean(self.data) + __margin_of_error)
