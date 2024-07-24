@@ -21,9 +21,9 @@ class OneSampleHypothesisTesting:
         self.population_mean = population_mean
 
         self.t_test_results = ttest_1samp(
-            a=self.data,
-            popmean=population_mean,
-            alternative=alternative,
+            a = self.data,
+            popmean = population_mean,
+            alternative = alternative,
         )
 
     def calculate_t_statistic(self) -> float:
