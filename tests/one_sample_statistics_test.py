@@ -28,6 +28,14 @@ def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     assert round(t_test.statistic, 3) == 0.991
 
 
+def test_one_sample_confidence_interval_has_correct_lower_and_upper_bound():
+
+    confidence_interval = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], population_mean=3.5).calculate_ci()
+
+    assert round(confidence_interval[0], 3) == 3.296
+    assert round(confidence_interval[1], 3) == 7.104
+
+
 @pytest.mark.parametrize("input_data", [([]), [5]])
 def test_one_sample_t_test_raises_error_when_input_has_less_than_two_elements(
     input_data,
