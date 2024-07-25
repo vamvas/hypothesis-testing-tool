@@ -12,6 +12,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.dependencies]
 python = "^3.11"
 scipy = "^1.14.0"
+matplotlib = "^3.9.1"
 
 [tool.poetry.group.tests.dependencies]
 black = "^24.4.2"
