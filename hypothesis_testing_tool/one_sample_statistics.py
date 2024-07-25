@@ -1,4 +1,5 @@
-from scipy.stats import ttest_1samp
+from scipy import stats
+import numpy as np
 
 
 class OneSampleHypothesisTesting:
@@ -15,25 +16,16 @@ class OneSampleHypothesisTesting:
         elif len(set(data)) == 1:
             raise Exception("Input data must not have identical elements")
 
-        else:
-            self.data = data
+        self.data = data
 
-        self.population_mean = population_mean
-
-        self.t_test_results = ttest_1samp(
+        self.t_test_results = stats.ttest_1samp(
             a=self.data,
             popmean=population_mean,
             alternative=alternative,
         )
 
-    def calculate_t_statistic(self) -> float:
+    def calculate_ci(self, alpha: float = 0.05) -> tuple:
+        __standard_error = np.std(self.data, ddof=1) / np.sqrt(len(self.data))
+        __margin_of_error = stats.t.ppf((1 + (1 - alpha)) / 2, len(self.data) - 1) * __standard_error
 
-        t_statistic = self.t_test_results.statistic
-
-        return t_statistic
-
-    def calculate_pvalue(self) -> float:
-
-        p_value = self.t_test_results.pvalue
-
-        return p_value
+        return (np.mean(self.data) - __margin_of_error, np.mean(self.data) + __margin_of_error)
