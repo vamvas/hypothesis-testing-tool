@@ -6,7 +6,7 @@ class OneSampleHypothesisTesting:
     def __init__(
         self,
         data: list,
-        population_mean: float,
+        null_population_mean: float,
         alternative: str = "two-sided",
     ):
 
@@ -17,10 +17,10 @@ class OneSampleHypothesisTesting:
             raise Exception("Input data must not have identical elements")
 
         self.data = data
-
+        self.null_population_mean = null_population_mean
         self.t_test_results = stats.ttest_1samp(
             a=self.data,
-            popmean=population_mean,
+            popmean=self.null_population_mean,
             alternative=alternative,
         )
 
@@ -30,6 +30,7 @@ class OneSampleHypothesisTesting:
 
         return {
             "lower_bound": np.mean(self.data) - __margin_of_error,
-            "point_stimate": np.mean(self.data),
+            "point_estimate": np.mean(self.data),
             "upper_bound": np.mean(self.data) + __margin_of_error,
+            "null_population_mean": self.null_population_mean,
         }
