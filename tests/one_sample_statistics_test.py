@@ -1,4 +1,4 @@
-from hypothesis_testing_tool.one_sample_statistics import (
+from hypothesis_testing_tool.compute_stats.one_sample_statistics import (
     OneSampleHypothesisTesting,
 )
 import pytest
