@@ -24,8 +24,12 @@ class OneSampleHypothesisTesting:
             alternative=alternative,
         )
 
-    def calculate_ci(self, alpha: float = 0.05) -> tuple:
+    def calculate_ci(self, alpha: float = 0.05) -> dict:
         __standard_error = np.std(self.data, ddof=1) / np.sqrt(len(self.data))
         __margin_of_error = stats.t.ppf((1 + (1 - alpha)) / 2, len(self.data) - 1) * __standard_error
 
-        return (np.mean(self.data) - __margin_of_error, np.mean(self.data) + __margin_of_error)
+        return {
+            "lower_bound": np.mean(self.data) - __margin_of_error,
+            "point_stimate": np.mean(self.data),
+            "upper_bound": np.mean(self.data) + __margin_of_error,
+        }

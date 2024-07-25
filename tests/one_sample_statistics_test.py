@@ -32,16 +32,18 @@ def test_one_sample_confidence_interval_has_correct_lower_and_upper_bound():
 
     confidence_interval = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], population_mean=3.5).calculate_ci()
 
-    assert round(confidence_interval[0], 3) == 0.439
-    assert round(confidence_interval[1], 3) == 9.961
+    assert round(confidence_interval["lower_bound"], 3) == 0.439
+    assert round(confidence_interval["point_stimate"], 3) == 5.2
+    assert round(confidence_interval["upper_bound"], 3) == 9.961
 
 
 def test_one_sample_confidence_interval_has_correct_lower_and_upper_bound_for_alpha_different_than_default():
 
     confidence_interval = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], population_mean=3.5).calculate_ci(alpha=0.01)
 
-    assert round(confidence_interval[0], 3) == -2.694
-    assert round(confidence_interval[1], 3) == 13.094
+    assert round(confidence_interval["lower_bound"], 3) == -2.694
+    assert round(confidence_interval["point_stimate"], 3) == 5.2
+    assert round(confidence_interval["upper_bound"], 3) == 13.094
 
 
 @pytest.mark.parametrize("input_data", [([]), [5]])
