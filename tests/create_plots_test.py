@@ -2,6 +2,9 @@ from hypothesis_testing_tool.presentation.create_plots import create_one_sample_
 from hypothesis_testing_tool.compute_stats.one_sample_statistics import (
     OneSampleHypothesisTesting,
 )
+import matplotlib
+
+matplotlib.use("Agg")
 
 
 def test_create_one_sample_hypothesis_plot_saves_file_as_png_at_path(tmp_path):
