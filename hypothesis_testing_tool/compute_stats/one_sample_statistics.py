@@ -2,7 +2,7 @@ from scipy import stats
 import numpy as np
 
 
-class OneSampleHypothesisTesting:
+class OneSampleTest:
     def __init__(
         self,
         data: list,

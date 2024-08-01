@@ -1,6 +1,6 @@
 from hypothesis_testing_tool.presentation.create_plots import create_one_sample_hypothesis_plot
 from hypothesis_testing_tool.compute_stats.one_sample_statistics import (
-    OneSampleHypothesisTesting,
+    OneSampleTest,
 )
 import matplotlib
 
@@ -8,7 +8,7 @@ matplotlib.use("Agg")
 
 
 def test_create_one_sample_hypothesis_plot_saves_file_as_png_at_path(tmp_path):
-    ci_dict = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
+    ci_dict = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
 
     create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict)
 
@@ -17,7 +17,7 @@ def test_create_one_sample_hypothesis_plot_saves_file_as_png_at_path(tmp_path):
 
 def test_create_one_sample_hypothesis_plot_returns_correct_fig_object_based_on_input(tmp_path):
 
-    ci_dict = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
+    ci_dict = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
 
     fig, ax = create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict, width=10, height=5)
 
@@ -27,7 +27,7 @@ def test_create_one_sample_hypothesis_plot_returns_correct_fig_object_based_on_i
 
 def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_input(tmp_path):
 
-    ci_dict = OneSampleHypothesisTesting(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
+    ci_dict = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
 
     fig, ax = create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict)
     lines = ax.get_lines()

@@ -1,7 +1,7 @@
 from scipy import stats
 
 
-class TwoSampleHypothesisTesting:
+class TwoSampleTest:
     def __init__(self, group_a: list, group_b: list, alternative: str = "two-sided", equal_var=True):
         self.group_a = group_a
         self.group_b = group_b
