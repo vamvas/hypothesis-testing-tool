@@ -36,6 +36,7 @@ def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_
     point_estimate_circle = lines[2]
     upper_bound_circle = lines[3]
     vertical_null_population_line = lines[-1]
+    legend = ax.get_legend()
 
     assert len(lines) == 5  # Three points, one vertical line, one horizontal_line
 
@@ -64,3 +65,5 @@ def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_
 
     assert ax.get_title() == "95% Confidence Interval (CI) for the Mean of One Sample"
     assert ax.get_xlabel() == "Values"
+
+    assert legend is not None
