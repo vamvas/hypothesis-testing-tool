@@ -16,6 +16,8 @@ def create_one_sample_hypothesis_plot(path_to_save_plot: str, ci_dict: dict, wid
 
     ax.axvline(x=ci_dict["null_population_mean"], color="red", linestyle="--", linewidth=2, label="Null Population Mean")
 
+    ax.legend(loc="upper right", frameon=True)
+
     plt.savefig(f"{path_to_save_plot}")
     plt.close(fig)
 
