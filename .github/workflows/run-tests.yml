@@ -8,8 +8,6 @@ on:
       - master
 
   push:
-    branches:
-      - '*'
     branches-ignore:
       - 'master'
 
