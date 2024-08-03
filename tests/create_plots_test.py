@@ -1,4 +1,4 @@
-from hypothesis_testing_tool.presentation.create_plots import create_one_sample_hypothesis_plot
+from hypothesis_testing_tool.presentation.create_plots import OneSampleCIPlot
 import pytest
 import matplotlib
 
@@ -12,29 +12,33 @@ def ci_dict():
 
 def test_create_one_sample_hypothesis_plot_saves_file_as_png_at_path(ci_dict, tmp_path):
 
-    create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict)
+    with OneSampleCIPlot(ci_dict) as plot_instance:
+        plot_instance.save_plot(tmp_path / "one_sample_plot.png")
 
     assert (tmp_path / "one_sample_plot.png").exists()
 
 
-def test_create_one_sample_hypothesis_plot_returns_correct_fig_object_based_on_input(ci_dict, tmp_path):
+def test_create_one_sample_hypothesis_plot_returns_correct_fig_object_based_on_input(ci_dict):
 
-    fig, ax = create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict, width=10, height=5)
+    with OneSampleCIPlot(ci_dict, width=20, height=15) as plot_instance:
+        plot_figure = plot_instance.fig
 
-    assert fig.get_size_inches().tolist() == [10, 5]
-    assert len(fig.get_axes()) == 1
+    assert plot_figure.get_size_inches().tolist() == [20, 15]
+    assert len(plot_figure.get_axes()) == 1
 
 
-def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_input(ci_dict, tmp_path):
+def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_input(ci_dict):
 
-    fig, ax = create_one_sample_hypothesis_plot(tmp_path / "one_sample_plot.png", ci_dict)
-    lines = ax.get_lines()
+    with OneSampleCIPlot(ci_dict) as plot_instance:
+        plot_axes = plot_instance.ax
+        lines = plot_axes.get_lines()
+        legend = plot_axes.get_legend()
+
     horizontal_line = lines[0]
     lower_bound_circle = lines[1]
     point_estimate_circle = lines[2]
     upper_bound_circle = lines[3]
     vertical_null_population_line = lines[-1]
-    legend = ax.get_legend()
 
     assert len(lines) == 5  # Three points, one vertical line, one horizontal_line
 
@@ -70,7 +74,7 @@ def test_create_one_sample_hypothesis_plot_returns_correct_axes_object_based_on_
     assert vertical_null_population_line.get_label() == "Null Population Mean"
     assert vertical_null_population_line.get_xdata() == [3, 3]
 
-    assert ax.get_title() == "95% Confidence Interval (CI) for the Mean of One Sample"
-    assert ax.get_xlabel() == "Values"
+    assert plot_axes.get_title() == "95% Confidence Interval (CI) for the Mean of One Sample"
+    assert plot_axes.get_xlabel() == "Values"
 
     assert legend is not None
