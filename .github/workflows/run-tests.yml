@@ -9,7 +9,9 @@ on:
 
   push:
     branches:
-      - '**'
+      - '*'
+    branches-ignore:
+      - 'master'
 
 jobs:
   run-tests:
