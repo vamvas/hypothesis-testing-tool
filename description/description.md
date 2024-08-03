@@ -119,27 +119,17 @@ confidence_interval
 
 
 ```python
-from hypothesis_testing_tool.presentation.create_plots import create_one_sample_hypothesis_plot
+from hypothesis_testing_tool.presentation.create_plots import OneSampleCIPlot
 
 ```
 
 
 ```python
-create_one_sample_hypothesis_plot(
-    path_to_save_plot = "artifacts/one_sample_plot.png",
-    ci_dict = confidence_interval,
-    width = 10,
-    height = 5
-)
+with OneSampleCIPlot(confidence_interval, width = 8, height = 4) as plot_instance:
+        plot_instance.save_plot("artifacts/one_sample_plot.png")
+        plot_instance.show_plot()
+
 ```
-
-
-
-
-    (<Figure size 1000x500 with 1 Axes>,
-     <Axes: title={'center': '95% Confidence Interval (CI) for the Mean of One Sample'}, xlabel='Values'>)
-
-
 
 <img src="https://raw.githubusercontent.com/vamvas/hypothesis-testing-tool/master/description/artifacts/one_sample_plot.png" >
 
