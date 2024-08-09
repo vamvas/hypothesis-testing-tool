@@ -6,42 +6,42 @@ def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
 
     t_test = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.378
-    assert round(t_test.statistic, 3) == 0.991
+    assert t_test.pvalue == pytest.approx(0.3775, abs=1e-4)
+    assert t_test.statistic == pytest.approx(0.9914, abs=1e-4)
 
 
 def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_lower():
 
     t_test = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5, alternative="less").t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.811
-    assert round(t_test.statistic, 3) == 0.991
+    assert t_test.pvalue == pytest.approx(0.8112, abs=1e-4)
+    assert t_test.statistic == pytest.approx(0.9914, abs=1e-4)
 
 
 def test_one_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_higher():
 
     t_test = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5, alternative="greater").t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.189
-    assert round(t_test.statistic, 3) == 0.991
+    assert t_test.pvalue == pytest.approx(0.1887, abs=1e-4)
+    assert t_test.statistic == pytest.approx(0.9914, abs=1e-4)
 
 
 def test_one_sample_confidence_interval_has_correct_lower_and_upper_bound():
 
     confidence_interval = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci()
 
-    assert round(confidence_interval["lower_bound"], 3) == 0.439
-    assert round(confidence_interval["point_estimate"], 3) == 5.2
-    assert round(confidence_interval["upper_bound"], 3) == 9.961
+    assert confidence_interval["lower_bound"] == pytest.approx(0.4393, abs=1e-4)
+    assert confidence_interval["point_estimate"] == 5.2
+    assert confidence_interval["upper_bound"] == pytest.approx(9.9606, abs=1e-4)
 
 
 def test_one_sample_confidence_interval_has_correct_lower_and_upper_bound_for_alpha_different_than_default():
 
     confidence_interval = OneSampleTest(data=[1, 2, 5, 8, 10], null_population_mean=3.5).calculate_ci(alpha=0.01)
 
-    assert round(confidence_interval["lower_bound"], 3) == -2.694
-    assert round(confidence_interval["point_estimate"], 3) == 5.2
-    assert round(confidence_interval["upper_bound"], 3) == 13.094
+    assert confidence_interval["lower_bound"] == pytest.approx(-2.6943, abs=1e-4)
+    assert confidence_interval["point_estimate"] == 5.2
+    assert confidence_interval["upper_bound"] == pytest.approx(13.0943, abs=1e-4)
 
 
 @pytest.mark.parametrize("input_data", [([]), [5]])
