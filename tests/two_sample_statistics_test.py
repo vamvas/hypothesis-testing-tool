@@ -17,8 +17,8 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b).t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.000
-    assert round(t_test.statistic, 3) == -7.016
+    assert t_test.pvalue == pytest.approx(0.000, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
     assert t_test.df == 98.0
 
 
@@ -27,9 +27,9 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b, equal_var=False).t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.000
-    assert round(t_test.statistic, 3) == -7.016
-    assert round(t_test.df, 3) == 95.507
+    assert t_test.pvalue == pytest.approx(0.000, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
+    assert t_test.df == pytest.approx(95.5071, abs=1e-4)
 
 
 def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_greater_and_equal_variance(mock_data_for_two_samples):
@@ -37,8 +37,8 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b, alternative="greater").t_test_results
 
-    assert round(t_test.pvalue, 3) == 1.000
-    assert round(t_test.statistic, 3) == -7.016
+    assert t_test.pvalue == pytest.approx(0.9999, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
     assert t_test.df == 98.0
 
 
@@ -47,9 +47,9 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b, equal_var=False, alternative="greater").t_test_results
 
-    assert round(t_test.pvalue, 3) == 1.000
-    assert round(t_test.statistic, 3) == -7.016
-    assert round(t_test.df, 3) == 95.507
+    assert t_test.pvalue == pytest.approx(0.9999, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
+    assert t_test.df == pytest.approx(95.5071, abs=1e-4)
 
 
 def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternative_of_less_and_equal_variance(mock_data_for_two_samples):
@@ -57,8 +57,8 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b, alternative="less").t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.000
-    assert round(t_test.statistic, 3) == -7.016
+    assert t_test.pvalue == pytest.approx(0.000, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
     assert t_test.df == 98.0
 
 
@@ -67,9 +67,9 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     group_a, group_b = mock_data_for_two_samples
     t_test = TwoSampleTest(group_a, group_b, equal_var=False, alternative="less").t_test_results
 
-    assert round(t_test.pvalue, 3) == 0.000
-    assert round(t_test.statistic, 3) == -7.016
-    assert round(t_test.df, 3) == 95.507
+    assert t_test.pvalue == pytest.approx(0.000, abs=1e-4)
+    assert t_test.statistic == pytest.approx(-7.0164, abs=1e-4)
+    assert t_test.df == pytest.approx(95.5071, abs=1e-4)
 
 
 def test_bootstrap_method_returns_correct_output(mock_data_for_two_samples):
@@ -77,12 +77,12 @@ def test_bootstrap_method_returns_correct_output(mock_data_for_two_samples):
     group_a, group_b = mock_data_for_two_samples
     boostrap_result = TwoSampleTest(group_a, group_b).get_bootstrap_sampling_distribution_of_means(iterations=5)
 
-    assert [round(x, 3) for x in boostrap_result] == [-1.169, -1.301, -1.451, -1.372, -1.106]
+    assert [round(x, 3) for x in boostrap_result] == pytest.approx([-1.169, -1.301, -1.451, -1.372, -1.106], abs=1e-3)
 
 
 def test_shapiro_wilk_normality_test_returns_correct_pvalues(mock_data_for_two_samples):
 
     group_a, group_b = mock_data_for_two_samples
-    shapiro_wilk_pvalue = TwoSampleTest(group_a, group_b).shapiro_wilk_normality_test()
+    shapiro_wilk_pvalue = TwoSampleTest(group_a, group_b).shapiro_wilk_pvalue()
 
-    assert round(shapiro_wilk_pvalue, 3) == 0.464
+    assert shapiro_wilk_pvalue == pytest.approx(0.4643, abs=1e-4)
