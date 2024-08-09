@@ -15,7 +15,7 @@ class TwoSampleTest:
             alternative=alternative,
         )
 
-    def shapiro_wilk_normality_test(self) -> float:
+    def shapiro_wilk_pvalue(self) -> float:
         data = self.get_bootstrap_sampling_distribution_of_means()
         shapiro_test = stats.shapiro(data)
 
