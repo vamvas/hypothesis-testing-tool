@@ -70,3 +70,11 @@ def test_two_sample_t_test_returns_correct_t_statistic_and_p_value_for_alternati
     assert round(t_test.pvalue, 3) == 0.000
     assert round(t_test.statistic, 3) == -7.016
     assert round(t_test.df, 3) == 95.507
+
+
+def test_bootstrap_method_returns_correct_output(mock_data_for_two_samples):
+
+    group_a, group_b = mock_data_for_two_samples
+    boostrap_result = TwoSampleTest(group_a, group_b).get_bootstrap_sampling_distribution_of_means(iterations=5)
+
+    assert [round(x, 3) for x in boostrap_result] == [-1.169, -1.301, -1.451, -1.372, -1.106]
