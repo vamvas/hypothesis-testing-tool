@@ -2,7 +2,7 @@ from scipy import stats
 import numpy as np
 
 
-class OneSampleTest:
+class OneSampleMean:
     def __init__(
         self,
         data: list,

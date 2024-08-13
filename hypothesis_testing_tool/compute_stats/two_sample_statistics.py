@@ -3,7 +3,7 @@ import numpy as np
 from typing import List
 
 
-class TwoSampleTest:
+class TwoSampleMean:
     def __init__(self, group_a: list, group_b: list, alternative: str = "two-sided", equal_var=True):
         self.group_a = group_a
         self.group_b = group_b
@@ -20,6 +20,11 @@ class TwoSampleTest:
         shapiro_test = stats.shapiro(data)
 
         return shapiro_test.pvalue
+
+    def levene_pvalue(self) -> float:
+        levene_test = stats.levene(self.group_a, self.group_b)
+
+        return levene_test.pvalue
 
     def get_bootstrap_sampling_distribution_of_means(self, iterations=1000) -> List[float]:
         np.random.seed(42)
